@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rejestracja</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: url('https://img.freepik.com/darmowe-zdjecie/piekny-widok-na-zachod-slonca-na-morzu_23-2148019892.jpg?t=st=1737623953~exp=1737627553~hmac=a9a7958d129a2a856bbf3be249647b95e47fc1265986adbbc475793cf71b1dd6&w=1380') no-repeat center center fixed;
+        background-size: cover;
+    }
+    .container {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+    }
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background 0.3s;
+    }
+    button:hover {
+        background-color: #218838;
+    }
+    .message {
+        margin-top: 15px;
+        font-size: 14px;
+        color: #333;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Rejestracja</h1>
+  <!-- Formularz z Thymeleaf -->
+  <form id="registerForm" th:action="@{/api/register}" method="post">
+    <input type="email" id="email" placeholder="Wprowadz swój email" name="email" required>
+    <button type="submit">Zarejestruj</button>
+  </form>
+  <div class="message" id="message" th:text="${message}"></div>
+</div>
+
+<script>
+  document.getElementById('registerForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const messageDiv = document.getElementById('message');
+
+      messageDiv.textContent = 'Procesowanie...';
+
+      fetch('/api/register', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams({ email }),
+      })
+      .then(response => response.text())
+      .then(message => {
+          messageDiv.textContent = message;
+          if (message.toLowerCase().includes("successful")) {
+              messageDiv.style.color = "green";
+          } else {
+              messageDiv.style.color = "red";
+          }
+      })
+      .catch(error => {
+          messageDiv.textContent = "An error occurred. Please try again.";
+          messageDiv.style.color = "red";
+      });
+  });
+</script>
+</body>
+</html>
