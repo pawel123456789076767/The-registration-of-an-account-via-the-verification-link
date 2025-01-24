@@ -7,7 +7,7 @@ import org.antlr.v4.runtime.misc.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "useeer")
+@Table(name = "usser")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

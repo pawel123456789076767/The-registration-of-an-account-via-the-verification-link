@@ -39,22 +39,34 @@
         font-size: 14px;
     }
     button {
-        padding: 10px 20px;
-        background-color: #28a745;
-        color: white;
+        width: 100%;
+        padding: 10px;
+        background: #5a67d8;
+        color: #fff;
         border: none;
         border-radius: 5px;
-        cursor: pointer;
         font-size: 16px;
+        cursor: pointer;
         transition: background 0.3s;
     }
+
     button:hover {
-        background-color: #218838;
+        background: #434190;
     }
-    .message {
-        margin-top: 15px;
+
+    .error-message {
+        color: #e53e3e;
+        margin-top: 10px;
         font-size: 14px;
-        color: #333;
+    }
+
+    .login {
+        margin-top: 15px;
+        background: #38a169;
+    }
+
+    .login:hover {
+        background: #2f855a;
     }
   </style>
 </head>
@@ -67,6 +79,9 @@
     <button type="submit">Zarejestruj</button>
   </form>
   <div class="message" id="message" th:text="${message}"></div>
+  <a href="/login">
+    <button class="login">Zaloguj się</button>
+  </a>
 </div>
 
 <script>

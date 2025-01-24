@@ -72,6 +72,15 @@
         margin-top: 10px;
         font-size: 14px;
     }
+
+    .register-button {
+        margin-top: 15px;
+        background: #38a169;
+    }
+
+    .register-button:hover {
+        background: #2f855a;
+    }
   </style>
 </head>
 <body>
@@ -89,6 +98,10 @@
   <div th:if="${param.error}" class="error-message">
     <p>Błąd logowania: Nieprawidłowy email lub konto niezweryfikowane.</p>
   </div>
+
+  <a href="/register">
+    <button class="register-button">Zarejestruj się</button>
+  </a>
 </div>
 </body>
 </html>
